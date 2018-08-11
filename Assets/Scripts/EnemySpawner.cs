@@ -13,6 +13,9 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField] float minSpawnSpread = 3f;
     private Vector2 position;
 
+    [SerializeField] GameObject leftEndOfMap;
+    [SerializeField] GameObject rightEndOfMap;
+
     // Use this for initialization
     void Start () {
 		
@@ -34,6 +37,11 @@ public class EnemySpawner : MonoBehaviour {
         float xSpawnPosition = Random.Range(transform.position.x + minSpawnSpread, transform.position.x + maxSpawnSpread);
         float sign = Random.value < 0.5f ? -1f : 1f; // select a negative or positive value
         xSpawnPosition = xSpawnPosition * sign;
+
+        // Check if beyond edge of maps
+        if( (xSpawnPosition <= leftEndOfMap.transform.position.x) || (xSpawnPosition >= rightEndOfMap.transform.position.x)) {
+            xSpawnPosition = -xSpawnPosition;
+        }
 
         // Set where to spawn enemy
         position = new Vector2(xSpawnPosition, transform.position.y);

@@ -56,3 +56,5 @@ MonoBehaviour:
   StartTimeBtwEnemies: 2
   maxSpawnSpread: 3
   minSpawnSpread: 7
+  leftEndOfMap: {fileID: 0}
+  rightEndOfMap: {fileID: 0}
