@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int playerSpeed = 10;
     [SerializeField] int playerJumpPower = 1250;
     [SerializeField] Rigidbody2D rigidBody;
-    [SerializeField] BoxCollider2D playerCollider;
 
     private bool facingRight = true;
     private float moveX;
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
-        playerCollider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame

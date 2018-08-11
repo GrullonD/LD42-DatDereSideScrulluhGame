@@ -16,8 +16,16 @@ public class PlayerHealth : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CheckIfDead();
-        DeathProcess();
+        if(hasDied == true) {
+            DeathProcess();
+        }
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Bullet") {
+            health -= 10;
+        }
+    }
 
     private void CheckIfDead() {
         if (health <= 0) {
@@ -25,9 +33,7 @@ public class PlayerHealth : MonoBehaviour {
         }
     }
     private void DeathProcess() {
-        if (hasDied == true) {
             StartCoroutine("Die");
-        }
     }
     IEnumerator Die() {
         SceneManager.LoadScene("Level1");
