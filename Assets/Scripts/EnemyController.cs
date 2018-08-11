@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] int stoppingDistance = 5;     // How far to stay away from target
     [SerializeField] float targetDistanceSpread = 2f;   // Spread of different enemies from target
 
+    private GameObject player;
     private Transform target;
     private float targetDistance;
 
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        player = GameObject.FindWithTag("Player");
         target = GameObject.FindWithTag("Player").transform;
         targetDistance = stoppingDistance + Random.Range(-targetDistanceSpread, targetDistanceSpread);
 
@@ -39,12 +41,6 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "PlayerBullet") {
-            DestroyEnemy();
-        }
-    }
-
     private void FollowTarget() {
         float distanceToTarget = Vector2.Distance(transform.position, target.position);
         // If distance to target is greater than 'targetDistance' then follow
@@ -55,6 +51,22 @@ public class EnemyController : MonoBehaviour {
             // Follow target
             transform.position = Vector2.MoveTowards(transform.position, actualTarget, speed * Time.deltaTime);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Player") {
+            StartCoroutine(Die());
+            player.GetComponent<PlayerScore>().playerScore += 10;
+            player.GetComponent<PlayerScore>().UpdateScore();
+            player.GetComponentInChildren<EnemySpawner>().UpdateScore();
+        }
+    }
+    IEnumerator Die() {
+        print("Enemy Died");
+        yield return new WaitForSeconds(0.2f);
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        DestroyEnemy();
     }
 
     private void DestroyEnemy() {

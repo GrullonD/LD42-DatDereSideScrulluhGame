@@ -6,8 +6,8 @@ public class EnemySpawner : MonoBehaviour {
 
     [SerializeField] GameObject enemyGameObject;
 
-    [SerializeField] float StartTimeBtwEnemies = 2f;
-    private float timeBtwEnemies = 2f;
+    [SerializeField] float StartTimeBtwEnemies = 2.000f;
+    private float timeBtwEnemies = 2.00f;
 
     [SerializeField] float maxSpawnSpread = 7f;
     [SerializeField] float minSpawnSpread = 3f;
@@ -16,13 +16,15 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField] GameObject leftEndOfMap;
     [SerializeField] GameObject rightEndOfMap;
 
+    public int currentScore;
+
     // Use this for initialization
     void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        UpdateScore();
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (timeBtwEnemies <= 0) {
             SpawnEnemy();
             timeBtwEnemies = StartTimeBtwEnemies;
@@ -30,6 +32,11 @@ public class EnemySpawner : MonoBehaviour {
         else {
             timeBtwEnemies -= Time.deltaTime;
         }
+    }
+
+    public void UpdateScore() {
+        currentScore = GameObject.FindWithTag("Player").GetComponent<PlayerScore>().playerScore;
+        StartTimeBtwEnemies = NewSpawnTime(currentScore);
     }
 
     private void SpawnEnemy() {
@@ -46,5 +53,35 @@ public class EnemySpawner : MonoBehaviour {
         // Set where to spawn enemy
         position = new Vector2(xSpawnPosition, transform.position.y);
         Instantiate(enemyGameObject, position, Quaternion.identity);
+    }
+
+    private float NewSpawnTime(int score) {
+
+        float newSpawnTime = 0;
+
+        if(score > 100) {
+            newSpawnTime = StartTimeBtwEnemies/2;
+        }
+        else if (score > 200) {
+            newSpawnTime = StartTimeBtwEnemies / 2;
+        }
+        else if (score > 400) {
+            newSpawnTime = StartTimeBtwEnemies / 2;
+        }
+        else if (score > 800) {
+            newSpawnTime = StartTimeBtwEnemies / 2;
+        }
+        else if (score > 1600) {
+            newSpawnTime = StartTimeBtwEnemies / 2;
+        }
+        else if (score > 3200) {
+            newSpawnTime = StartTimeBtwEnemies / 2;
+        }
+        else {
+            newSpawnTime = StartTimeBtwEnemies;
+        }
+
+
+        return newSpawnTime;
     }
 }

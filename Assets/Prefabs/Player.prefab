@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 61503450951113832}
   - component: {fileID: 50953342387670772}
   - component: {fileID: 114877879432606140}
+  - component: {fileID: 114834440765778916}
+  - component: {fileID: 114572111123143742}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -30,6 +32,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1982884084700042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4620327007222214}
+  - component: {fileID: 114259128244261114}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4620327007222214
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1982884084700042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4701256775399386}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4701256775399386
 Transform:
   m_ObjectHideFlags: 1
@@ -39,7 +70,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.4849057, y: -0.1135125, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children: []
+  m_Children:
+  - {fileID: 4620327007222214}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -88,6 +120,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.92, y: 3.06}
   m_EdgeRadius: 0
+--- !u!114 &114259128244261114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1982884084700042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1a39a92f649494eb3cfe33ac03b7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyGameObject: {fileID: 1043978321496260, guid: aadcd60da4f0e0748ba582c824628c48,
+    type: 2}
+  StartTimeBtwEnemies: 2
+  maxSpawnSpread: 3
+  minSpawnSpread: 7
+  leftEndOfMap: {fileID: 0}
+  rightEndOfMap: {fileID: 0}
+--- !u!114 &114572111123143742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1159314919479702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340cec5ec5d977e41af24b654482b2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  playerScore: 0
+  scoreUI: {fileID: 0}
+--- !u!114 &114834440765778916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1159314919479702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6cace9f5b927044290ed09c34683078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1000
+  hasDied: 0
 --- !u!114 &114877879432606140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,7 +179,6 @@ MonoBehaviour:
   playerSpeed: 10
   playerJumpPower: 1250
   rigidBody: {fileID: 0}
-  playerCollider: {fileID: 0}
 --- !u!212 &212588939758926620
 SpriteRenderer:
   m_ObjectHideFlags: 1
