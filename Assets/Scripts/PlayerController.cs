@@ -11,17 +11,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Rigidbody2D rigidBody;
 
     private bool facingRight = true;
+    private bool isGrounded = false;
     private float moveX;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         PlayerMove();
     }
 
@@ -29,20 +28,17 @@ public class PlayerController : MonoBehaviour
     {
         // Controls
         moveX = Input.GetAxis("Horizontal");
-        if (Input.GetButtonDown("Jump"))
-        {
+        if (Input.GetButtonDown("Jump") && isGrounded == true) {
             Jump();
         }
 
         // Animations
 
         // Player Direction
-        if (moveX < 0.0f && facingRight == true)
-        {
+        if (moveX < 0.0f && facingRight == true) {
             FlipPlayer();
         }
-        else if (moveX > 0.0f && facingRight == false)
-        {
+        else if (moveX > 0.0f && facingRight == false) {
             FlipPlayer();
         }
 
@@ -50,13 +46,12 @@ public class PlayerController : MonoBehaviour
         rigidBody.velocity = new Vector2(moveX * playerSpeed, rigidBody.velocity.y);
     }
 
-    private void Jump()
-    {
+    private void Jump() {
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
+        isGrounded = false;
     }
 
-    private void FlipPlayer()
-    {
+    private void FlipPlayer() {
         facingRight = !facingRight;
         Vector2 localScale = gameObject.transform.localScale;
 
@@ -64,4 +59,9 @@ public class PlayerController : MonoBehaviour
         transform.localScale = localScale;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Ground") {
+            isGrounded = true;
+        }
+    }
 }
