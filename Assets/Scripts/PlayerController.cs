@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] int playerSpeed = 10;
     [SerializeField] int playerJumpPower = 1250;
+    [SerializeField] Rigidbody2D rigidBody;
+    [SerializeField] BoxCollider2D playerCollider;
 
     private bool facingRight = true;
     private float moveX;
@@ -15,7 +17,8 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        rigidBody = gameObject.GetComponent<Rigidbody2D>();
+        playerCollider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -46,7 +49,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Physics
-        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        rigidBody.velocity = new Vector2(moveX * playerSpeed, rigidBody.velocity.y);
     }
 
     private void Jump()
@@ -62,4 +65,5 @@ public class PlayerController : MonoBehaviour
         localScale.x *= -1;
         transform.localScale = localScale;
     }
+
 }
