@@ -60,22 +60,22 @@ public class EnemySpawner : MonoBehaviour {
         float newSpawnTime = 0;
 
         if(score > 100) {
-            newSpawnTime = StartTimeBtwEnemies/2;
+            newSpawnTime = StartTimeBtwEnemies/4;
         }
         else if (score > 200) {
-            newSpawnTime = StartTimeBtwEnemies / 2;
+            newSpawnTime = StartTimeBtwEnemies / 8;
         }
         else if (score > 400) {
-            newSpawnTime = StartTimeBtwEnemies / 2;
+            newSpawnTime = StartTimeBtwEnemies / 16;
         }
         else if (score > 800) {
-            newSpawnTime = StartTimeBtwEnemies / 2;
+            newSpawnTime = StartTimeBtwEnemies / 32;
         }
         else if (score > 1600) {
-            newSpawnTime = StartTimeBtwEnemies / 2;
+            newSpawnTime = StartTimeBtwEnemies / 64;
         }
         else if (score > 3200) {
-            newSpawnTime = StartTimeBtwEnemies / 2;
+            newSpawnTime = StartTimeBtwEnemies / 128;
         }
         else {
             newSpawnTime = StartTimeBtwEnemies;

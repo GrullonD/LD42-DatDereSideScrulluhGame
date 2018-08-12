@@ -21,6 +21,6 @@ public class PlayerScore : MonoBehaviour {
     }
 
     public void UpdateScore() {
-        scoreUI.gameObject.GetComponent<Text>().text = ("Score: " + playerScore);
+        scoreUI.gameObject.GetComponent<Text>().text = ("" + playerScore);
     }
 }

@@ -54,18 +54,20 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Player") {
-            StartCoroutine(Die());
-            player.GetComponent<PlayerScore>().playerScore += 10;
-            player.GetComponent<PlayerScore>().UpdateScore();
-            player.GetComponentInChildren<EnemySpawner>().UpdateScore();
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "PlayerBullet") {
+            Dying();
         }
+    }
+    public void Dying() {
+        StartCoroutine(Die());
+        player.GetComponent<PlayerScore>().playerScore += 10;
+        player.GetComponent<PlayerScore>().UpdateScore();
+        player.GetComponentInChildren<EnemySpawner>().UpdateScore();
     }
     IEnumerator Die() {
         print("Enemy Died");
-        yield return new WaitForSeconds(0.2f);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         DestroyEnemy();
     }
 

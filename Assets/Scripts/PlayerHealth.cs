@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
-    public int health = 1000;
     public bool hasDied = false;
-    [SerializeField] GameObject healthUI;
 
+    [SerializeField] private Stat health;
+
+    private void Awake() {
+        health.Initialize();
+    }
     // Use this for initialization
     void Start () {
         UpdateHealth();
@@ -31,12 +34,11 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     private void UpdateHealth() {
-        health -= 10;
-        healthUI.gameObject.GetComponent<Text>().text = ("Health: " + health);
+        health.CurrentVal -= 10;
     }
 
     private void CheckIfDead() {
-        if (health <= 0) {
+        if (health.CurrentVal <= 0) {
             hasDied = true;
         }
     }
