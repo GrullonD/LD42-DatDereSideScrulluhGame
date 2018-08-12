@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject mainCamera;
 
+    [SerializeField] GameObject playerSprite;
+
     [SerializeField] int playerSpeed = 10;
     [SerializeField] int playerJumpPower = 1250;
     [SerializeField] Rigidbody2D rigidBody;
@@ -96,10 +98,10 @@ public class PlayerController : MonoBehaviour
     }
     private void FlipPlayer() {
         facingRight = !facingRight;
-        Vector2 localScale = gameObject.transform.localScale;
+        Vector2 localScale = playerSprite.transform.localScale;
 
         localScale.x *= -1;
-        transform.localScale = localScale;
+        playerSprite.transform.localScale = localScale;
     }
 
     private void SpaceVaporizer() {
