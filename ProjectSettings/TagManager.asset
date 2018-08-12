@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - PlayerBullet
   - Ground
+  - ShakeCamera
+  - MainWeapon
   layers:
   - Default
   - TransparentFX

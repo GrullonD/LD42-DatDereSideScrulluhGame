@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour {
 
     public bool hasDied = false;
 
+
     [SerializeField] private Stat health;
 
     private void Awake() {
@@ -43,10 +44,6 @@ public class PlayerHealth : MonoBehaviour {
         }
     }
     private void DeathProcess() {
-            StartCoroutine("Die");
-    }
-    IEnumerator Die() {
-        SceneManager.LoadScene("Level1");
-        yield return null;
+        FindObjectOfType<GameManager>().EndGame();
     }
 }

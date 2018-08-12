@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1159314919479702, guid: f2e0530e57e4766458cb8348459881d2, type: 2}
   speed: 5
-  generalTargetDistance: 5
+  stoppingDistance: 5
   targetDistanceSpread: 2
   projectile: {fileID: 1723219229896008, guid: 69ecd3f66bf2cc443941abe644ee4117, type: 2}
   StartTimeBtwShots: 2
