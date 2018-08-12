@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         // Controls
         moveX = Input.GetAxis("Horizontal");
-        if ( (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && numOfJumps < MaxNumOfJumps) {
+        if ( (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && numOfJumps < MaxNumOfJumps) {
             Jump();
         }
 
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void SpaceVaporizer() {
-        if ( (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) ) && usingSpaceVaporizer == false) {
+        if ( (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.KeypadEnter) ) && usingSpaceVaporizer == false) {
             usingSpaceVaporizer = true;
             spaceVaporizerCharged = false;
             spaceVaporizer.CurrentVal -= spaceVaporizer.MaxVal;

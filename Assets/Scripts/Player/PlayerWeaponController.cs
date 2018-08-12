@@ -42,12 +42,13 @@ public class PlayerWeaponController : MonoBehaviour {
         mousePosition.x = mousePosition.x - weaponPosition.x;
         mousePosition.y = mousePosition.y - weaponPosition.y;
 
-        angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-
         facingRight = player.GetComponent<PlayerController>().facingRight;
         if (!facingRight) {
-            angle -= 180;
+            //angle -= 180;
+           // mousePosition.y = -mousePosition.y;
         }
+
+        angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
