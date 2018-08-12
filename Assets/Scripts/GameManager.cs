@@ -15,8 +15,45 @@ public class GameManager : MonoBehaviour {
     
     [SerializeField] GameObject gameOverScoreText;
 
+    [SerializeField] GameObject heart;
+    [SerializeField] GameObject heartSpawnZone;
+    [SerializeField] int scoreToSpawnHeart = 200;
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
+    public bool gaveHeart = false;
+    public int gaveHeartScore;
+
     private void Start() {
         player = GameObject.FindWithTag("Player");
+        minX = heartSpawnZone.GetComponent<Renderer>().bounds.min.x;
+        maxX = heartSpawnZone.GetComponent<Renderer>().bounds.max.x;
+        minY = heartSpawnZone.GetComponent<Renderer>().bounds.min.y;
+        maxY = heartSpawnZone.GetComponent<Renderer>().bounds.max.y;
+    }
+
+    private void Update() {
+        CheckScore();
+    }
+
+    private void CheckScore() {
+        score = player.GetComponent<PlayerScore>().playerScore;
+
+        if(gaveHeart == false && (score % scoreToSpawnHeart == 0)) {
+            gaveHeart = true;
+            gaveHeartScore = score;
+            GiveHealth();
+        }
+
+        if(gaveHeart == true && gaveHeartScore != score) {
+            gaveHeart = false;
+        }
+    }
+
+    public void GiveHealth() {
+        Vector3 spawnLocation = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY));
+        Instantiate(heart, spawnLocation, Quaternion.identity);
     }
 
     public void EndGame() {

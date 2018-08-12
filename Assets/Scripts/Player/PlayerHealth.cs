@@ -8,8 +8,7 @@ public class PlayerHealth : MonoBehaviour {
 
     public bool hasDied = false;
 
-
-    [SerializeField] private Stat health;
+    [SerializeField] public Stat health;
 
     private void Awake() {
         health.Initialize();

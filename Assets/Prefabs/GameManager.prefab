@@ -57,3 +57,5 @@ MonoBehaviour:
   mainMenuUI: {fileID: 0}
   gameOverUI: {fileID: 0}
   gameOverScoreText: {fileID: 0}
+  heart: {fileID: 1300329795055366, guid: 28e4564614450324bbbce67a5bcd98c9, type: 2}
+  heartSpawnZone: {fileID: 0}
