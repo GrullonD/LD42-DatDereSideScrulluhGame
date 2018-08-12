@@ -22,10 +22,21 @@ public class PlayerController : MonoBehaviour
 
     private float moveX;
 
-    [SerializeField] int numOfSpaceVaporizers = 5;
+    [SerializeField] private Stat spaceVaporizer;
+    [SerializeField] float startSVRechargeRate = 1f;
+    private float svRechargeRate = 1f;
     public bool usingSpaceVaporizer = false;
+    private bool spaceVaporizerCharged = true;
     private float svShake = 0.1f;
     private float svLength = 2f;
+
+
+    private float Second = 1f;
+    private float milliSecond = 1f;
+
+    private void Awake() {
+        spaceVaporizer.Initialize();
+    }
 
     // Use this for initialization
     void Start() {
@@ -37,6 +48,16 @@ public class PlayerController : MonoBehaviour
     void Update() {
         PlayerMove();
         SpaceVaporizer();
+
+        if(spaceVaporizer.CurrentVal != spaceVaporizer.MaxVal) { 
+            if (milliSecond <= 0) {
+                RechargeVaporizer();
+                milliSecond = Second;
+            }
+            else {
+                milliSecond -= Time.deltaTime;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -82,9 +103,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void SpaceVaporizer() {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) && usingSpaceVaporizer == false && numOfSpaceVaporizers != 0) {
+        if ( (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) ) && usingSpaceVaporizer == false) {
             usingSpaceVaporizer = true;
-            numOfSpaceVaporizers -= 1;
+            spaceVaporizerCharged = false;
+            spaceVaporizer.CurrentVal -= spaceVaporizer.MaxVal;
             StartCoroutine("ActivateSpaceVaporizer");
         }
     }
@@ -93,8 +115,7 @@ public class PlayerController : MonoBehaviour
 
         // Perform Space Vaporizer Function
         Vaporizing();
-        yield return new WaitForSeconds(1f);
-        usingSpaceVaporizer = false;
+        yield return new WaitForSeconds(startSVRechargeRate);
     }
     private void Vaporizing() {
         mainCamera.GetComponent<CameraShake>().Shake(svShake, svLength);
@@ -102,5 +123,12 @@ public class PlayerController : MonoBehaviour
         foreach (GameObject enemy in enemies)
             enemy.GetComponent<EnemyController>().Dying();
            // GameObject.Destroy(enemy);
+    }
+    private void RechargeVaporizer() {
+        if (spaceVaporizer.CurrentVal < 0) spaceVaporizer.CurrentVal = 0;
+        if(spaceVaporizer.CurrentVal <= spaceVaporizer.MaxVal) {
+            spaceVaporizer.CurrentVal += (spaceVaporizer.MaxVal / startSVRechargeRate);
+        }
+        if(spaceVaporizer.CurrentVal == spaceVaporizer.MaxVal) usingSpaceVaporizer = false;
     }
 }

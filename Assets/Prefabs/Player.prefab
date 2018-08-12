@@ -290,7 +290,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasDied: 0
-  healthUI: {fileID: 0}
   health:
     bar: {fileID: 0}
     maxVal: 1000
@@ -312,7 +311,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   facingRight: 1
   MaxNumOfJumps: 3
+  spaceVaporizer:
+    bar: {fileID: 0}
+    maxVal: 100
+    currentVal: 100
   numOfSpaceVaporizers: 3
+  startSVRechargeRate: 5
   usingSpaceVaporizer: 0
 --- !u!212 &212183787009482910
 SpriteRenderer:

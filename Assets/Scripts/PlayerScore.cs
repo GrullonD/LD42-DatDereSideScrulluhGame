@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerScore : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class PlayerScore : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        UpdateScore();
 	}
 	
 	// Update is called once per frame
@@ -21,6 +22,6 @@ public class PlayerScore : MonoBehaviour {
     }
 
     public void UpdateScore() {
-        scoreUI.gameObject.GetComponent<Text>().text = ("" + playerScore);
+        scoreUI.gameObject.GetComponent<TextMeshProUGUI>().text = ("" + playerScore);
     }
 }

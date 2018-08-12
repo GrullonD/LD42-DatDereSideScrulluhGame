@@ -1,18 +1,38 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
     bool gameHasEnded = false;
     [SerializeField] float restartDelay = 3f;
 
-	public void EndGame() {
+    [SerializeField] GameObject player;
+    public int score;
+
+    [SerializeField] GameObject mainMenuUI;
+    [SerializeField] GameObject gameOverUI;
+    
+    [SerializeField] GameObject gameOverScoreText;
+
+    private void Start() {
+        player = GameObject.FindWithTag("Player");
+    }
+
+    public void EndGame() {
         if(gameHasEnded == false) {
             gameHasEnded = true;
 
             // Blur background
 
-            // Show Score
+            // Show game over menu
+            mainMenuUI.SetActive(false);
+            gameOverUI.SetActive(true);
+
+            // Show score
+            score = player.GetComponent<PlayerScore>().playerScore;
+            gameOverScoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
+
             // Restart Game
             Invoke("Restart", restartDelay);
         }
