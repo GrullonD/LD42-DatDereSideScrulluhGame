@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Bullet
+  - PlayerBullet
+  - Ground
+  - ShakeCamera
+  - MainWeapon
+  - HealthUp
   layers:
   - Default
   - TransparentFX
@@ -14,7 +21,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - EnvironmentLayer
   - 
   - 
   - 
